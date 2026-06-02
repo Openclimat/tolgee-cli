@@ -97,13 +97,6 @@ export interface Schema {
    * In most cases, it's better to use a one-time `login` command or set it via the `TOLGEE_API_KEY` environment variable.
    */
   apiKey?: string;
-  /**
-   * Additional HTTP headers to send with every Tolgee API request.
-   *
-   * Useful when the Tolgee instance is behind Cloudflare Access, a WAF, or
-   * another gateway that requires custom auth headers (e.g. service tokens).
-   */
-  extraHeaders?: Record<string, string>;
   format?: Format;
   /**
    * A path to a custom extractor to use instead of the default one.

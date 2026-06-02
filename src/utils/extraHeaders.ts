@@ -40,27 +40,3 @@ export function parseExtraHeadersArg(value: string): Record<string, string> {
   }
   return out;
 }
-
-export function getCloudflareAccessHeaders(): Record<string, string> {
-  const id = process.env.CF_ACCESS_CLIENT_ID;
-  const secret = process.env.CF_ACCESS_CLIENT_SECRET;
-  if (!id || !secret) return {};
-  return {
-    'CF-Access-Client-Id': id,
-    'CF-Access-Client-Secret': secret,
-  };
-}
-
-export function resolveExtraHeaders(
-  fromOption: Record<string, string> | string | undefined
-): Record<string, string> | undefined {
-  const parsedOption =
-    typeof fromOption === 'string'
-      ? parseExtraHeadersArg(fromOption)
-      : fromOption;
-  const merged = {
-    ...getCloudflareAccessHeaders(),
-    ...(parsedOption ?? {}),
-  };
-  return Object.keys(merged).length > 0 ? merged : undefined;
-}

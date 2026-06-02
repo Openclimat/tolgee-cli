@@ -46,7 +46,6 @@ import { Schema } from './schema.js';
 import { createTolgeeClient } from './client/TolgeeClient.js';
 import { projectIdFromKey } from './client/ApiClient.js';
 import { printApiKeyLists } from './utils/apiKeyList.js';
-import { resolveExtraHeaders } from './utils/extraHeaders.js';
 
 const NO_KEY_COMMANDS = ['login', 'logout', 'extract'];
 
@@ -143,9 +142,6 @@ const preHandler = (config: Schema) =>
       validateOptions(cmd);
 
       const opts = cmd.optsWithGlobals();
-      const extraHeaders = resolveExtraHeaders(
-        opts.extraHeaders ?? config.extraHeaders
-      );
       const client = createTolgeeClient({
         baseUrl: opts.apiUrl?.toString() ?? config.apiUrl?.toString(),
         apiKey: opts.apiKey,
@@ -155,7 +151,7 @@ const preHandler = (config: Schema) =>
             : config.projectId !== undefined
               ? Number(config.projectId)
               : undefined,
-        extraHeaders,
+        extraHeaders: opts.extraHeaders,
       });
 
       cmd.setOptionValue('client', client);
@@ -188,7 +184,7 @@ async function run() {
     program.addOption(CONFIG_OPT);
     program.addOption(API_URL_OPT.default(config.apiUrl ?? DEFAULT_API_URL));
     program.addOption(API_KEY_OPT.default(config.apiKey));
-    program.addOption(EXTRA_HEADERS.default(config.extraHeaders));
+    program.addOption(EXTRA_HEADERS);
     program.addOption(PROJECT_ID_OPT.default(config.projectId ?? -1));
     program.addOption(PROJECT_BRANCH.default(config.branch));
     program.addOption(FORMAT_OPT.default(config.format ?? 'JSON_TOLGEE'));
