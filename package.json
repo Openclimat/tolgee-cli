@@ -1,11 +1,15 @@
 {
-  "name": "@tolgee/cli",
+  "name": "@nabal/tolgee-cli",
   "version": "2.16.1",
   "type": "module",
-  "description": "A tool to interact with the Tolgee Platform through CLI",
+  "description": "Fork of @tolgee/cli with support for extra HTTP headers (Cloudflare Access, WAFs, gateways).",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tolgee/tolgee-cli.git"
+    "url": "https://github.com/nabal/tolgee-cli.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "bin": {
     "tolgee": "./dist/cli.js"
