@@ -1,0 +1,24 @@
+name: Bump on merge
+on:
+  pull_request:
+    branches: [ "main"]
+    types: [ closed ]
+jobs:
+  perform-patch-bump:
+    if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'bump:patch')) }}
+    secrets: inherit
+    uses: Openclimat/openclimat-component-library/.github/workflows/bump.yml@main
+    with:
+      bump_type: patch
+  perform-minor-bump:
+    if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'bump:minor')) }}
+    secrets: inherit
+    uses: Openclimat/openclimat-component-library/.github/workflows/bump.yml@main
+    with:
+      bump_type: minor
+  perform-major-bump:
+    if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'bump:major')) }}
+    secrets: inherit
+    uses: Openclimat/openclimat-component-library/.github/workflows/bump.yml@main
+    with:
+      bump_type: major

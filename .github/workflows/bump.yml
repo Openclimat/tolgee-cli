@@ -1,0 +1,45 @@
+name: Bump Version
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Type of version bump to perform'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+  workflow_call:
+    inputs:
+      bump_type:
+        required: true
+        type: string
+jobs:
+  exec:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+      - name: Set Github User
+        run: |
+          git config user.email "contact@simonphilouze.fr"
+          git config user.name "Simon Philouze"
+          
+      - name: Bump version
+        env:
+          BUMP_TYPE: ${{ inputs.bump_type }}
+        run: npm version ${{ inputs.bump_type }}
+          
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.BUMP_VERSION_TOKEN }}
+          branch: ${{ github.ref }}
