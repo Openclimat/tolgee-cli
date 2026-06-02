@@ -1,6 +1,6 @@
 {
   "name": "@nabal/tolgee-cli",
-  "version": "2.16.1",
+  "version": "2.16.2",
   "type": "module",
   "description": "Fork of @tolgee/cli with support for extra HTTP headers (Cloudflare Access, WAFs, gateways).",
   "repository": {
