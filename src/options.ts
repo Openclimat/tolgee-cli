@@ -146,7 +146,7 @@ export const VERBOSE = new Option(
 
 export const EXTRA_HEADERS = new Option(
   '--extra-headers <headers>',
-  'Additional HTTP headers to send with every Tolgee API request. Accepts comma-separated Name=Value pairs (e.g. \'X-Foo=bar,X-Baz=qux\'). Useful for traversing Cloudflare Access, WAFs, or other gateways.'
+  "Additional HTTP headers to send with every Tolgee API request. Accepts comma-separated Name=Value pairs (e.g. 'X-Foo=bar,X-Baz=qux'). Useful for traversing Cloudflare Access, WAFs, or other gateways."
 )
   .env('TOLGEE_EXTRA_HEADERS')
   .argParser(parseExtraHeadersArg);
