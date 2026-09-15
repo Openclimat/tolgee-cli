@@ -1,0 +1,20 @@
+name: Required Reviews
+
+# Status check obligatoire : nombre de reviews humaines exigées selon le label risk:*
+# et l'appartenance de l'auteur à l'équipe petites-roulettes.
+# Logique dans Openclimat/openclimat-ci-agent (README, section « Politique de review »).
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+  pull_request_review:
+    types: [submitted, dismissed, edited]
+
+permissions:
+  pull-requests: read
+  contents: read
+
+jobs:
+  required-reviews:
+    uses: Openclimat/openclimat-ci-agent/.github/workflows/required-reviews.yml@v1
+    secrets: inherit

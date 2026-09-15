@@ -1,0 +1,15 @@
+name: Risk Label
+
+# Pose risk:low par défaut et garde risk:low / risk:high exclusifs.
+# Logique dans Openclimat/openclimat-ci-agent (README, section « Politique de review »).
+
+on:
+  pull_request_target:
+    types: [opened, reopened, labeled]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  risk-label:
+    uses: Openclimat/openclimat-ci-agent/.github/workflows/risk-label.yml@v1
